@@ -1,0 +1,26 @@
+﻿<Window x:Class="SimpleSpeaker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimpleSpeaker"
+        mc:Ignorable="d"
+        
+        Title="MainWindow" Height="680" Width="250" Loaded="Window_Loaded" ResizeMode="CanMinimize"
+       >
+    <Grid>
+        <ListView Margin="0,20,0,0" HorizontalAlignment="Stretch" Height="600" VerticalAlignment="Top" Name="Main_list">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="文件名" Width="50" />
+                    <GridViewColumn Header="路径"  />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Menu x:Name="menu" Height="20" HorizontalAlignment="Center" Width="250" VerticalAlignment="Top">
+            <MenuItem Header="文件" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,0,0,0">
+                <MenuItem Header="打开目录" Click="MenuItem0_Click" />
+            </MenuItem>
+        </Menu>
+    </Grid>
+</Window>
