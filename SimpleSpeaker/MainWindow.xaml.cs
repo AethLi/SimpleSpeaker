@@ -30,7 +30,7 @@ namespace SimpleSpeaker
             }
             foreach(FileInfo f in audio_list)
             {
-                Main_list.Items.Add(f.Name,f.DirectoryName);
+                Main_list.Items.Add(new file_info(f.Name, f.DirectoryName));
             }
         }
 
@@ -38,5 +38,20 @@ namespace SimpleSpeaker
         {
 
         }
+    }
+
+    class file_info
+    {
+        string name;
+        string dirname;
+
+        public file_info(string name, string dirname)
+        {
+            this.Name = name;
+            this.Dirname = dirname;
+        }
+
+        public string Dirname { get => dirname; set => dirname = value; }
+        public string Name { get => name; set => name = value; }
     }
 }
