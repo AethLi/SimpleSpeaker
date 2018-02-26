@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Media;
 
 namespace SimpleSpeaker
 {
@@ -30,11 +31,16 @@ namespace SimpleSpeaker
             }
             foreach(FileInfo f in audio_list)
             {
-                Main_list.Items.Add(new file_info(f.Name, f.DirectoryName));
+                Main_list.Items.Add(f);
             }
         }
 
         private void MenuItem0_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_play_Click(object sender, RoutedEventArgs e)
         {
 
         }

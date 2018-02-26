@@ -9,11 +9,11 @@
         Title="MainWindow" Height="680" Width="680" Loaded="Window_Loaded" ResizeMode="CanMinimize"
        >
     <Grid >
-        <ListView Margin="0,20,0,0" HorizontalAlignment="Stretch" Height="600" VerticalAlignment="Top" Name="Main_list" ItemsSource="{Binding Path=file_info}">
+        <ListView Margin="0,20,0,0" HorizontalAlignment="Stretch" Height="450" VerticalAlignment="Top" Name="Main_list" ItemsSource="{Binding Path=FileInfo}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="文件名" DisplayMemberBinding="{Binding Path=Name}"/>
-                    <GridViewColumn Header="路径" DisplayMemberBinding="{Binding Path=Dirname}"/>
+                    <GridViewColumn Header="路径" DisplayMemberBinding="{Binding Path=DirectoryName}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -22,5 +22,6 @@
                 <MenuItem Header="打开目录" Click="MenuItem0_Click" />
             </MenuItem>
         </Menu>
+        <Button x:Name="button_play" Content=" 播 放 " HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,20" Click="button_play_Click"/>
     </Grid>
 </Window>
