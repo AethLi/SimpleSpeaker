@@ -6,18 +6,18 @@
         xmlns:local="clr-namespace:SimpleSpeaker"
         mc:Ignorable="d"
         
-        Title="MainWindow" Height="680" Width="250" Loaded="Window_Loaded" ResizeMode="CanMinimize"
+        Title="MainWindow" Height="680" Width="680" Loaded="Window_Loaded" ResizeMode="CanMinimize"
        >
     <Grid >
-        <ListView Margin="0,20,0,0" HorizontalAlignment="Stretch" Height="600" VerticalAlignment="Top" Name="Main_list">
+        <ListView Margin="0,20,0,0" HorizontalAlignment="Stretch" Height="600" VerticalAlignment="Top" Name="Main_list" ItemsSource="{Binding Path=file_info}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="文件名" DisplayMemberBinding="{Binding Path=file_info.name}"/>
-                    <GridViewColumn Header="路径" DisplayMemberBinding="{Binding file_info.dirname}"/>
+                    <GridViewColumn Header="文件名" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Header="路径" DisplayMemberBinding="{Binding Path=Dirname}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Menu x:Name="menu" Height="20" HorizontalAlignment="Center" Width="250" VerticalAlignment="Top">
+        <Menu x:Name="menu" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <MenuItem Header="文件" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,0,0">
                 <MenuItem Header="打开目录" Click="MenuItem0_Click" />
             </MenuItem>
