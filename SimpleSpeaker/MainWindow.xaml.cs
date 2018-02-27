@@ -10,76 +10,94 @@ namespace SimpleSpeaker
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<FileInfo> audio_list = new List<FileInfo>();
         public MainWindow()
         {
             InitializeComponent();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<FileInfo> audio_list = new List<FileInfo>();
             string path = Directory.GetCurrentDirectory();
             path = path + "\\音频库";
-            DirectoryInfo the_folder = new DirectoryInfo(path);
-            DirectoryInfo[] dirInfo = the_folder.GetDirectories();
-            foreach (DirectoryInfo NextFolder in dirInfo)
+            DirectoryInfo folder = new DirectoryInfo(path);
+            TraversalDir(folder);
+        }
+
+        private void MenuItem0_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_play_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TraversalDir(DirectoryInfo folder)
+        {
+            if (folder.Exists)
             {
+                FileInfo[] fileInfo = folder.GetFiles("*.mp3");
+                DirectoryInfo[] subs = folder.GetDirectories();
+                foreach (FileInfo f in fileInfo)
                 {
-                    FileInfo[] fileInfo = NextFolder.GetFiles("*.mp3");
-                    foreach (FileInfo NextFile in fileInfo)
-                    {
-                        audio_list.Add(NextFile);
-                    }
-                }
-                foreach (FileInfo f in audio_list)
-                {
+                    audio_list.Add(f);
                     Main_list.Items.Add(f);
                 }
+                foreach (DirectoryInfo sub_folder in subs)
+                {
+                    TraversalDir(sub_folder);
+                }
             }
-        }
-
-        public class MP3Player
-        {
-            /// <summary>   
-            /// 文件地址   
-            /// </summary>   
-            public string FilePath;
-
-            /// <summary>   
-            /// 播放   
-            /// </summary>   
-            public void Play()
+            else
             {
-                mciSendString("close all", "", 0, 0);
-                mciSendString("open " + FilePath + " alias media", "", 0, 0);
-                mciSendString("play media", "", 0, 0);
+                MessageBox.Show("目录不存在");
             }
-
-            /// <summary>   
-            /// 暂停   
-            /// </summary>   
-            public void Pause()
-            {
-                mciSendString("pause media", "", 0, 0);
-            }
-
-            /// <summary>   
-            /// 停止   
-            /// </summary>   
-            public void Stop()
-            {
-                mciSendString("close media", "", 0, 0);
-            }
-
-            /// <summary>   
-            /// API函数   
-            /// </summary>   
-            [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
-            private static extern int mciSendString(
-             string lpstrCommand,
-             string lpstrReturnString,
-             int uReturnLength,
-             int hwndCallback
-            );
         }
     }
+    public class MP3Player
+    {
+        /// <summary>   
+        /// 文件地址   
+        /// </summary>   
+        public string FilePath;
+
+        /// <summary>   
+        /// 播放   
+        /// </summary>   
+        public void Play()
+        {
+            mciSendString("close all", "", 0, 0);
+            mciSendString("open " + FilePath + " alias media", "", 0, 0);
+            mciSendString("play media", "", 0, 0);
+        }
+
+        /// <summary>   
+        /// 暂停   
+        /// </summary>   
+        public void Pause()
+        {
+            mciSendString("pause media", "", 0, 0);
+        }
+
+        /// <summary>   
+        /// 停止   
+        /// </summary>   
+        public void Stop()
+        {
+            mciSendString("close media", "", 0, 0);
+        }
+
+        /// <summary>   
+        /// API函数   
+        /// </summary>   
+        [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
+        private static extern int mciSendString(
+         string lpstrCommand,
+         string lpstrReturnString,
+         int uReturnLength,
+         int hwndCallback
+        );
+    }
+
 }
