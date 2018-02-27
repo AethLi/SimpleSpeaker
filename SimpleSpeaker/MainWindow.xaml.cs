@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows;
-using System.Media;
+using System.Runtime.InteropServices;
 
 namespace SimpleSpeaker
 {
@@ -22,7 +22,7 @@ namespace SimpleSpeaker
             DirectoryInfo the_folder = new DirectoryInfo(path);
             DirectoryInfo[] dirInfo = the_folder.GetDirectories();
             foreach (DirectoryInfo NextFolder in dirInfo)
-            {
+           {
                 FileInfo[] fileInfo = NextFolder.GetFiles("*.txt");
                 foreach (FileInfo NextFile in fileInfo)
                 {
@@ -42,22 +42,20 @@ namespace SimpleSpeaker
 
         private void button_play_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 
-    class file_info
+    class Mp3Player
     {
-        string name;
-        string dirname;
+        string filePath = null;
 
-        public file_info(string name, string dirname)
+        public string FilePath { get => filePath; set => filePath = value; }
+        public void play()
         {
-            this.Name = name;
-            this.Dirname = dirname;
+            mciSendString("close all", 0, 0);
         }
-
-        public string Dirname { get => dirname; set => dirname = value; }
-        public string Name { get => name; set => name = value; }
+        [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
+        private static extern int mciSendString(string IpstrCommand, string IpstrReturnString, int uReturnString, int hwndCallback);
     }
 }
